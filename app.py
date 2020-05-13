@@ -7,6 +7,7 @@ from sqlalchemy import create_engine, func
 from flask import Flask, jsonify
 import datetime as dt
 
+# Create engine
 engine = create_engine("sqlite:///Resources/hawaii.sqlite")
 
 # Reflect an existing database into a new model
@@ -46,7 +47,7 @@ def calc_temps(start_date, end_date):
 
 # Flask Routes
 
-# Home
+# Home Page
 @app.route("/")
 def main():
     return (
@@ -97,8 +98,8 @@ def stations():
         station_dict["ID"] = station.id
         station_dict["station"] = station.station
         station_dict["name"] = station.name
-        station_dict["lat"] = station.latitude
-        station_dict["long"] = station.longitude
+        station_dict["latitude"] = station.latitude
+        station_dict["longitude"] = station.longitude
         station_dict["elevation"] = station.elevation
         stations_list.append(station_dict)
     # Return json object
@@ -141,7 +142,7 @@ def start(start):
         all()
     # Set max date
     max_date = final_date_query[0][0]
-    # `calc_temps` will accept start date and end date in the format '%y-%m-%d' 
+    # `calc_temps` will accept start date and end date in the format '%Y-%m-%d' 
     # and return the minimum, average, and maximum temperatures for that range of dates
     temps = calc_temps(start, max_date)
     # Create a [] to store minimum, average, and maximum temperatures
@@ -159,7 +160,7 @@ def start(start):
 # Start_End
 @app.route("/api/v1.0/<start>/<end>")
 def start_end(start, end):
-    # `calc_temps` will accept start date and end date in the format '%y-%m-%d' 
+    # `calc_temps` will accept start date and end date in the format '%Y-%m-%d' 
     # and return the minimum, average, and maximum temperatures for that range of dates
     temps = calc_temps(start, end)
     # Create a [] to store minimum, average, and maximum temperatures
