@@ -80,6 +80,8 @@ def precipitation():
     # Loop through query and store in {}
     for result in precipitation_data:
         results_dict[result[0]] = result[1]
+    # Close session
+    session.close()
     # Return json object
     return jsonify(results_dict)
 
@@ -102,6 +104,8 @@ def stations():
         station_dict["longitude"] = station.longitude
         station_dict["elevation"] = station.elevation
         stations_list.append(station_dict)
+    # Close session
+    session.close()
     # Return json object
     return jsonify(stations_list)
 
@@ -130,6 +134,8 @@ def tobs():
         tobs_dict["station"] = result.station
         tobs_dict["tobs"] = result.tobs
         tobs_list.append(tobs_dict)
+    # Close session
+    session.close()
     # Return json object
     return jsonify(tobs_list)
 
@@ -154,6 +160,8 @@ def start(start):
     return_list.append({'Observation': 'TMIN', 'Temperature': temps[0][0]})
     return_list.append({'Observation': 'TAVG', 'Temperature': temps[0][1]})
     return_list.append({'Observation': 'TMAX', 'Temperature': temps[0][2]})
+    # Close session
+    session.close()
     # Return json object
     return jsonify(return_list)
 
@@ -172,6 +180,8 @@ def start_end(start, end):
     return_list.append({'Observation': 'TMIN', 'Temperature': temps[0][0]})
     return_list.append({'Observation': 'TAVG', 'Temperature': temps[0][1]})
     return_list.append({'Observation': 'TMAX', 'Temperature': temps[0][2]})
+    # Close session
+    session.close()
     # Return json object
     return jsonify(return_list)
 
